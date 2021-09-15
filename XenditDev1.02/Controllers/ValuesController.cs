@@ -8,6 +8,7 @@ using Xendit.ApiClient;
 using Xendit.ApiClient.Constants;
 using Xendit.ApiClient.Invoice;
 using Xendit.ApiClient.VirtualAccount;
+using Xendit.ApiClient.Disbursement;
 using XenditDev1._02.Function;
 using XenditDev1._02.Response;
 namespace XenditDev1._02.Controllers
@@ -24,6 +25,7 @@ namespace XenditDev1._02.Controllers
             Disbursement disb = new Disbursement();
 
             XenditVACreateResponse xenditVA = new XenditVACreateResponse();
+            XenditBatchDisbursementCreateResponse xenditDisb = new XenditBatchDisbursementCreateResponse();
 
             xenditVA= await va.VaAsync("ded", 1, "9999000015", "VA_fixed-" + DateTime.Now, 5000000);
 
@@ -31,9 +33,13 @@ namespace XenditDev1._02.Controllers
 
             xenditVA = await va.VaExpired(xenditVA.Id);
 
-            await disb.Disb();
+            string[] email;
+            email = new string[2] { "dkurniawan28@gmail.com", "jono@dsd.com"};
 
-            return new string[] { xenditVA.AccountNumber };
+
+            xenditDisb= await disb.Disb("dedy test",500000,XenditDisbursementBankCode.BCA,"dedy kurniawan","12345678","tester dedy",email,"122232333");
+
+            return new string[] { xenditDisb.Reference };
         }
 
         // GET api/values/5
