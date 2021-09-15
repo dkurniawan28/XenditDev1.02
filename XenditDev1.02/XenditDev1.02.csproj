@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="D:\Project VS\xendit-dotnet-master\xendit-dotnet-master\XenditApiClient\Xendit.ApiClient.csproj" />
+    <ProjectReference Include="..\XenditApiClient\Xendit.ApiClient.csproj" />
   </ItemGroup>
 
 </Project>
