@@ -19,7 +19,8 @@ namespace XenditDev1._02.Function
     public class VirtualAccount
     {
         public string key = "xnd_development_e48fDUwdgdh8UIoYHmpk6Dvroi3DQcB0LUKg1fPxAk8GJCR388SM2fiOnmkmyS1";
-        public async Task VaAsync (string nama,int bank, string vaNumber, string externalId,int amount)
+        public XenditVACreateResponse va = new XenditVACreateResponse();
+        public async Task<XenditVACreateResponse> VaAsync (string nama,int bank, string vaNumber, string externalId,int amount)
         {
             try
             {
@@ -53,20 +54,50 @@ namespace XenditDev1._02.Function
                     ExternalId = externalId,
                     BankCode = codeBank,
                     //VirtualAccountNumber = vaNumber,
+                    IsClosedVA = true,
                     ExpectedAmount = amount,
                     Name = nama
                     
                 };
-                var va = await xendit.VirtualAccount.CreateAsync(requestedVA);
+                
+                va = await xendit.VirtualAccount.CreateAsync(requestedVA);
             }
             catch (Exception ex)
             {
 
             }
-            
+
+            return va;
+
         }
 
+        public async Task<XenditVACreateResponse> Vacek(string idVa)
+        {
+            try
+            {
+                var xendit = new XenditClient(key);
+                va = await xendit.VirtualAccount.GetAsync(idVa);
+            }
+            catch (Exception ex)
+            {
 
+            }
+            return va;
+        }
+
+        public async Task<XenditVACreateResponse> VaExpired(string idVa)
+        {
+            try
+            {
+                var xendit = new XenditClient(key);
+                va = await xendit.VirtualAccount.ExpireAsync(idVa);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return va;
+        }
     }
 
 

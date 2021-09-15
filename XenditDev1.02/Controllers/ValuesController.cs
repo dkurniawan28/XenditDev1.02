@@ -18,14 +18,22 @@ namespace XenditDev1._02.Controllers
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ActionResult<IEnumerable<string>>> GetAsync()
         {
-            CreateVa createVa = new CreateVa();
             VirtualAccount va = new VirtualAccount();
-            va.VaAsync("ded", 1, "9999000015", "VA_fixed-" + DateTime.Now, 5000000);
+            Disbursement disb = new Disbursement();
 
+            XenditVACreateResponse xenditVA = new XenditVACreateResponse();
 
-            return new string[] { createVa.account_number };
+            xenditVA= await va.VaAsync("ded", 1, "9999000015", "VA_fixed-" + DateTime.Now, 5000000);
+
+            xenditVA = await va.Vacek(xenditVA.Id);
+
+            xenditVA = await va.VaExpired(xenditVA.Id);
+
+            await disb.Disb();
+
+            return new string[] { xenditVA.AccountNumber };
         }
 
         // GET api/values/5
