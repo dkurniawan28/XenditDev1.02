@@ -18,9 +18,10 @@ namespace XenditDev1._02.Function
 {
     public class VirtualAccount
     {
-        public string key = "xnd_development_e48fDUwdgdh8UIoYHmpk6Dvroi3DQcB0LUKg1fPxAk8GJCR388SM2fiOnmkmyS1";
+       // public string key = "xnd_development_e48fDUwdgdh8UIoYHmpk6Dvroi3DQcB0LUKg1fPxAk8GJCR388SM2fiOnmkmyS1";
+        public string key = "xnd_production_WXVTBwxm7Eqwg7jGpuL65TUMfDU6st9kjHIWyOjNiKU9NyAwB01Wq5w0YcWKs";
         public XenditVACreateResponse va = new XenditVACreateResponse();
-        public async Task<XenditVACreateResponse> VaAsync (string nama,int bank, string vaNumber, string externalId,int amount)
+        public async Task<XenditVACreateResponse> VaAsync (string nama,int bank, string vaNumber, string externalId,decimal amount)
         {
             try
             {
@@ -53,7 +54,7 @@ namespace XenditDev1._02.Function
                 {
                     ExternalId = externalId,
                     BankCode = codeBank,
-                    //VirtualAccountNumber = vaNumber,
+                   VirtualAccountNumber = vaNumber,
                     IsClosedVA = true,
                     ExpectedAmount = amount,
                     Name = nama

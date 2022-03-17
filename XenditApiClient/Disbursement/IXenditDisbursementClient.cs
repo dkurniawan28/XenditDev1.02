@@ -15,5 +15,6 @@ namespace Xendit.ApiClient.Disbursement
         Task<XenditDisbursementCreateResponse> CreateAsync(XenditDisbursementCreateRequest disbursement);
         
         Task<XenditBatchDisbursementCreateResponse> CreateBatchAsync(XenditBatchDisbursementCreateRequest disbursement);
+       
     }
 }

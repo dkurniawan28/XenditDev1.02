@@ -21,6 +21,10 @@ Please note that this library is not official from Xendit. You can refer to Xend
     <Version>1.0.1</Version>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Include="..\LICENSE.md">
       <Pack>True</Pack>
