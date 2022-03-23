@@ -1686,106 +1686,106 @@ namespace XenditDev1._02.Controllers
                 }
                 else if (idmerchan == 2)
                 {
-                    //string urlsign = "http://asri.aspan.co.id/AspanAsuransi/Account/Login";
+                    string urlsign = "http://asri.aspan.co.id/AspanAsuransi/Account/Login";
 
 
-                    //string username = "admin";
-                    //string password = "semogajaya@1993";
-                    //var clients = new RestClient(urlsign);
+                    string username = "admin";
+                    string password = "semogajaya@1993";
+                    var clients = new RestClient(urlsign);
 
-                    //var request = new RestRequest(Method.POST);
-                    //JObject jObjectbody = new JObject();
-                    //jObjectbody.Add("username", username);
-                    //jObjectbody.Add("password", password);
-                    //request.AddParameter("application/json", jObjectbody, ParameterType.RequestBody);
+                    var request = new RestRequest(Method.POST);
+                    JObject jObjectbody = new JObject();
+                    jObjectbody.Add("username", username);
+                    jObjectbody.Add("password", password);
+                    request.AddParameter("application/json", jObjectbody, ParameterType.RequestBody);
 
-                    //IRestResponse restResponse = clients.Execute(request);
-                    //string responses = restResponse.Content;
-                    //var jObject = JObject.Parse(restResponse.Content);
-                    //string cookvalue = "";
-                    //var sessionCookie = restResponse.Cookies.SingleOrDefault(x => x.Name == ".ASPXAUTH");
-                    //if (sessionCookie != null)
-                    //{
-                    //    cookvalue = sessionCookie.Value;
-                    //}
-                    //if (restResponse.StatusCode == HttpStatusCode.OK)
-                    //{
+                    IRestResponse restResponse = clients.Execute(request);
+                    string responses = restResponse.Content;
+                    var jObject = JObject.Parse(restResponse.Content);
+                    string cookvalue = "";
+                    var sessionCookie = restResponse.Cookies.SingleOrDefault(x => x.Name == ".ASPXAUTH");
+                    if (sessionCookie != null)
+                    {
+                        cookvalue = sessionCookie.Value;
+                    }
+                    if (restResponse.StatusCode == HttpStatusCode.OK)
+                    {
 
-                    //    string url = LinkCallback;
-                    //    var client = new RestClient(url);
+                        string url = LinkCallback;
+                        var client = new RestClient(url);
 
-                    //    var requestParam = new RestRequest(Method.POST);
+                        var requestParam = new RestRequest(Method.POST);
 
-                    //    requestParam.AddHeader("Content-Type", "application/json");
-                    //    requestParam.AddHeader("Cookie", ".ASPXAUTH=" + cookvalue);
-                    //    requestParam.AddParameter("application/json", content4, ParameterType.RequestBody);
+                        requestParam.AddHeader("Content-Type", "application/json");
+                        requestParam.AddHeader("Cookie", ".ASPXAUTH=" + cookvalue);
+                        requestParam.AddParameter("application/json", content4, ParameterType.RequestBody);
 
-                    //    ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+                        ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
 
-                    //    IRestResponse restResponseAspandigi = client.Execute(requestParam);
-                    //    string status = call2.status;
+                        IRestResponse restResponseAspandigi = client.Execute(requestParam);
+                        string status = call2.status;
 
-                    //    ResponseAspandigi responstatus = new ResponseAspandigi();
-
-
-                    //    if (restResponseAspandigi.StatusCode == HttpStatusCode.OK)
-                    //    {
-
-                    //        string response = restResponseAspandigi.Content;
-                    //        responstatus = JsonConvert.DeserializeObject<ResponseAspandigi>(response);
+                        ResponseAspandigi responstatus = new ResponseAspandigi();
 
 
-                    //        string responCode = responstatus.StatusCode.ToString();
+                        if (restResponseAspandigi.StatusCode == HttpStatusCode.OK)
+                        {
 
-                    //        if (responCode == "200")
-                    //        {
+                            string response = restResponseAspandigi.Content;
+                            responstatus = JsonConvert.DeserializeObject<ResponseAspandigi>(response);
 
-                    //            if (status == "FAILED")
-                    //            {
 
-                    //                updateDb.updateTransaksiDisbursementaspan(externalid, "FAILED");
-                    //                insertDb.InsertLog(content2, response, "http://192.168.0.8/xenditapi/api/callback/distbursmentpaid", Now);
-                    //                return Ok(sukses);
-                    //            }
-                    //            else if (status == "PENDING")
-                    //            {
+                            string responCode = responstatus.StatusCode.ToString();
 
-                    //                insertDb.InsertLog(content2, response, "http://192.168.0.8/xenditapi/api/callback/distbursmentpaid", Now);
-                    //                return Ok(sukses);
-                    //            }
-                    //            else if (status == "PAID")
-                    //            {
-                    //                updateDb.updateTransaksiDisbursementaspan(externalid, "PAID");
-                    //                insertDb.InsertLog(content2, response, "http://192.168.0.8/xenditapi/api/callback/distbursmentpaid", Now);
-                    //                return Ok(sukses);
-                    //            }
-                    //            else 
-                    //            {
-                    //                updateDb.updateTransaksiDisbursementaspan(externalid, "COMPLETED");
-                    //                insertDb.InsertLog(content2, response, "http://192.168.0.8/xenditapi/api/callback/distbursmentpaid", Now);
-                    //                return Ok(sukses);
-                    //            }
+                            if (responCode == "200")
+                            {
 
-                    //        }
-                    //        else
-                    //        {
+                                if (status == "FAILED")
+                                {
 
-                    //            return Ok(gagal);
-                    //        }
+                                    updateDb.updateTransaksiDisbursementaspan(externalid, "FAILED");
+                                    insertDb.InsertLog(content2, response, "http://192.168.0.8/xenditapi/api/callback/distbursmentpaid", Now);
+                                    return Ok(sukses);
+                                }
+                                else if (status == "PENDING")
+                                {
 
-                    //    }
-                    //    else
-                    //    {
+                                    insertDb.InsertLog(content2, response, "http://192.168.0.8/xenditapi/api/callback/distbursmentpaid", Now);
+                                    return Ok(sukses);
+                                }
+                                else if (status == "PAID")
+                                {
+                                    updateDb.updateTransaksiDisbursementaspan(externalid, "PAID");
+                                    insertDb.InsertLog(content2, response, "http://192.168.0.8/xenditapi/api/callback/distbursmentpaid", Now);
+                                    return Ok(sukses);
+                                }
+                                else
+                                {
+                                    updateDb.updateTransaksiDisbursementaspan(externalid, "COMPLETED");
+                                    insertDb.InsertLog(content2, response, "http://192.168.0.8/xenditapi/api/callback/distbursmentpaid", Now);
+                                    return Ok(sukses);
+                                }
 
-                    //        return Ok(gagal);
-                    //    }
+                            }
+                            else
+                            {
 
-                    //}
-                    //else
-                    //{
-                    //    return Ok(gagal);
-                    //}
-                    return Ok(gagal);
+                                return Ok(gagal);
+                            }
+
+                        }
+                        else
+                        {
+
+                            return Ok(gagal);
+                        }
+
+                    }
+                    else
+                    {
+                        return Ok(gagal);
+                    }
+                    // return Ok(gagal);
                 }
 
                 else if (idmerchan == 3)
